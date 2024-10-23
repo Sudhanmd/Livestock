@@ -4,6 +4,7 @@ import { LivestockModule } from './livestock/livestock.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FeedModule } from './feed/feed.module';
 import { MedicinalModule } from './medicines/medicines.module';
+import { RequestModule } from './request/request.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { MedicinalModule } from './medicines/medicines.module';
     UsersModule,
     LivestockModule,
     FeedModule,
-    MedicinalModule
+    MedicinalModule,
+    RequestModule
 
   ],controllers:[],providers:[]
 })
