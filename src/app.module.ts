@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './user/user.module';
 import { LivestockModule } from './livestock/livestock.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FeedModule } from './feed/feed.module';
+import { MedicinalModule } from './medicines/medicines.module';
 
 @Module({
   imports: [
@@ -21,7 +20,9 @@ import { FeedModule } from './feed/feed.module';
     }),
     UsersModule,
     LivestockModule,
-    FeedModule
+    FeedModule,
+    MedicinalModule
+
   ],controllers:[],providers:[]
 })
 export class AppModule {}
