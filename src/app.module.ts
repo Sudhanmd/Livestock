@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './user/user.module';
 import { LivestockModule } from './livestock/livestock.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { FeedModule } from './feed/feed.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
     UsersModule,
-    LivestockModule
+    LivestockModule,
+    FeedModule
   ],controllers:[],providers:[]
 })
 export class AppModule {}
