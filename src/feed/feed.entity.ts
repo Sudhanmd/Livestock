@@ -18,7 +18,7 @@ export class Feed {
   @Column()
   quantity: number;
 
-  @Column({ type: 'decimal', nullable: false })
+  @Column({ type: 'decimal'})
   pricePerUnit: number;
 }
 

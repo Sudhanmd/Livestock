@@ -5,7 +5,7 @@ import { Feed } from './feed.entity';
 import { createfeedDto } from './feed.dto';
 
 
-@Controller('feeds')
+@Controller('feed')
 export class FeedController {
   constructor(private readonly feedService: FeedService) {}
 

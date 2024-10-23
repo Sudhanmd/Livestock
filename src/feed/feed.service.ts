@@ -51,6 +51,6 @@ export class FeedService {
     if (result.affected === 0) {
       throw new NotFoundException(`Feed with ID ${id} not found`);
     }
-    return {result, message:`${id} is deleted successfully`};
+    return {result, message:`given id-${id} is deleted successfully`};
   }
 }

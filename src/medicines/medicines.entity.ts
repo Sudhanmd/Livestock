@@ -9,7 +9,7 @@ export class Medicine {
   @Column()
   medicineName: string;
 
-  @Column({ nullable: true })
+  @Column()
   brand?: string;
 
   @Column()
@@ -21,7 +21,7 @@ export class Medicine {
   @Column()
   quantity: number;
 
-  @Column()
+  @Column({ type: 'decimal', nullable: false })
   pricePerUnit: number;
 
 }

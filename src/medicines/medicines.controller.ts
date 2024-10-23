@@ -28,9 +28,9 @@ export class MedicineController {
   }
 
   // PUT method to update an existing medicine record
-  @Put(':id')
-  async updateMedicine(@Param('medicineId') medicineId: number, @Body() medicineData: Medicine){
-    return this.medicineService.updateMedicine(medicineId, medicineData);
+  @Put(':medicineId')
+  async updateMedicine(@Param('medicineId') medicineId: number, @Body() medicineEntity: Medicine){
+    return this.medicineService.updateMedicine(medicineId, medicineEntity);
   }
 
   // DELETE method to remove a medicine record by ID

@@ -1,4 +1,4 @@
-import{ IsNotEmpty, IsNumber,IsString } from "class-validator";
+import{ IsNotEmpty, IsNumber,IsOptional,IsString } from "class-validator";
 
 export class medicinesDto {
 
@@ -25,4 +25,17 @@ export class medicinesDto {
     @IsNotEmpty()
     @IsNumber()
     pricePerUnit: number;
+
+}
+ 
+export class optionalmedicineDto{
+
+    @IsNotEmpty()
+    @IsOptional()
+    quantity: number;
+
+    @IsNotEmpty()
+    @IsOptional()
+    pricePerUnit: number;
+
 }

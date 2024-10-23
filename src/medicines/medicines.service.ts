@@ -1,8 +1,8 @@
 // medicine.service.ts
-import { BadGatewayException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { medicinesDto } from './medicines.dto';
+import { medicinesDto, optionalmedicineDto } from './medicines.dto';
 import { Medicine } from './medicines.entity';
 
 
@@ -33,12 +33,14 @@ export class MedicineService {
   }
 
   // Method to update an existing medicine record
-  async updateMedicine(medicineId: number, updatemed:medicinesDto) {
-    try {
-      const checkmedicines = await this.medicineRepository.findOne({where:{medicineId}})
+  async updateMedicine(Id : number, updatemedicine: optionalmedicineDto) {
+    try { 
+      console.info(updatemedicine)
+      const checkmedicines = await this.medicineRepository.findOne({where:{medicineId:Id}})
       if(!checkmedicines)
-      {throw new NotFoundException(`given id ${medicineId} is not Found`)}
-      const medicineupdate = await this.medicineRepository.update(checkmedicines,updatemed)
+      {throw new NotFoundException(`given id ${Id} is not Found`)}
+      const medicineupdate = await this.medicineRepository.update(Id,updatemedicine)
+      return {medicineupdate, success:true};
     } catch (error) {
       throw new BadRequestException (error.message || error)
     }
@@ -50,6 +52,6 @@ export class MedicineService {
     if (result.affected === 0) {
       throw new NotFoundException(`Medicine with ID ${id} not found`);
     }
-    return result;
+    return {result,message:`given id-${id} is deleted successfully`} ;
   }
 }
