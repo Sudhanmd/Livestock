@@ -16,7 +16,7 @@ export class UsersController {
   }
 
   // Get all users (GET)
-  @Get()
+  @Get('getAllUsers')
   async getAllUsers() {
     return await this.usermodel.getAllUser()
   }
