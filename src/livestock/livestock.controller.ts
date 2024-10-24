@@ -9,32 +9,31 @@ export class LivestockController {
   constructor(private readonly livestockService: LivestockService) {}
 
 
-  @Post()
+  @Post('addLivestock')
   async createLivestock(@Body() body:livestockDto) {
     return await this.livestockService.createLivestock(body);
   }
-
-  @Get()
-  async getAllLivestock(){
+  @Get('getAllLivestock')
+  async getAllLivestock() {
     return this.livestockService.getAllLivestock();
   }
 
 
-  @Get(':livestockId')
-  async getLivestock(@Param('livestockId') livestockId: number){
+  @Get('getLivestockByLivestockId/:livestockId')
+  async getLivestockByLivestockId(@Param('livestockId') livestockId: number) {
     return this.livestockService.getLivestockById(livestockId);
   }
 
 
-  @Put(':livestockId')
+  @Put('updateLivestockByLivestockId/:livestockId')
   async update(@Param('livestockId') livestockId: number, @Body()body:updatelivestockDto){
     return this.livestockService.updateLivestock(livestockId,body);
   }
 
   // DELETE method to remove a livestock record by ID
-  @Delete(':livestockId')
+  @Delete('deleteLivestockByLivestockId/:livestockId')
   async deleteLivestock(@Param('livestockId') livestockId: number) {
    await this.livestockService.deleteLivestock(livestockId);
-  return {suc:true, message:"deleted successflly"}
+  return {success:true, message:"deleted successflly"}
   }
 }

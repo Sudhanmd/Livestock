@@ -29,7 +29,7 @@ export class livestockDto{
     @IsNotEmpty()
     location: string;
     
-    @IsEnum(['vaccinated', 'pending vaccination', 'not vaccinated'])
+    @IsEnum(['vaccinated', 'pending vaccination', 'not vaccinated'],{message:'valid role required. vaccinated | pending vaccination | not vaccinated' })
     VacinationStatus ?:  'vaccinated' | 'pending vaccination' | 'not vaccinated'; 
 
 }
@@ -38,15 +38,15 @@ export class updatelivestockDto {
 
     @IsNumber()
     @IsOptional()
-    age: number; 
+    age?: number;
     
     @IsString()
     @IsOptional()
-    healthcodition: string;
+    healthcodition?: string;
 
-    @IsEnum(['vaccinated', 'pending vaccination', 'not vaccinated'])
+    @IsEnum(['vaccinated', 'pending vaccination', 'not vaccinated'],{message:'valid role required. vaccinated | pending vaccination | not vaccinated' })
     @IsOptional()
-    VacinationStatus : 'vaccinated' | 'pending vaccination' | 'not vaccinated'; 
+    VacinationStatus? : 'vaccinated' | 'pending vaccination' | 'not vaccinated'; 
 
 
     

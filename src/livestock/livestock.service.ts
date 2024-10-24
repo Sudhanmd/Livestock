@@ -3,12 +3,14 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Livestock } from './livestock.entity';
+import { User } from 'src/user/user.entity';
 import { livestockDto, updatelivestockDto } from './livestock.dto';
 
 
 
 @Injectable()
 export class LivestockService {
+ 
   constructor(
     @InjectRepository(Livestock)
     private readonly livestockRepository: Repository<Livestock>,
@@ -16,11 +18,16 @@ export class LivestockService {
 
 
   async createLivestock(updatelivestock:livestockDto) {
-    return await  this.livestockRepository.save(updatelivestock);
+    try {
+     return await  this.livestockRepository.save(updatelivestock);
+    } catch (error) {
+      throw new BadRequestException(`If the request body is invalid.`)
+    }
+    
   }
 
 
-  async getAllLivestock(): Promise<Livestock[]> {
+  async getAllLivestock() {
     return await this.livestockRepository.find();
   }
 
@@ -33,10 +40,11 @@ export class LivestockService {
     return livestock;
   }
 
+
   // Method to update an existing livestock record
   async updateLivestock(livestockId: number, update:updatelivestockDto ) {
     try {
-      console.info(livestockDto)
+      console.info(update)
       const checklivestock = await this.livestockRepository.findOne({where:{livestockId}})
       if(!checklivestock) 
         {throw new NotFoundException(`given id ${livestockId} is not found`)}
@@ -44,7 +52,7 @@ export class LivestockService {
       return {success:true,mes:updatelivestock}
 
     } catch (error) {
-      throw new BadRequestException(error.message || error)
+      throw new BadRequestException(`If the input body is invalid.`)
     }
   }
 
