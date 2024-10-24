@@ -25,3 +25,4 @@ export class Medicine {
   pricePerUnit: number;
 
 }
+

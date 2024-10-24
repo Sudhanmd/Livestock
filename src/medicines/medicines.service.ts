@@ -15,7 +15,11 @@ export class MedicineService {
 
   // Method to create a new medicine record
   async createMedicine(updateMedicine:medicinesDto){
-    return await this.medicineRepository.save(updateMedicine);
+    try {
+      return await this.medicineRepository.save(updateMedicine);
+    } catch (error) {
+      throw new BadRequestException('If the request body is invalid.')
+    }
   }
 
  //get all the records
@@ -23,7 +27,7 @@ export class MedicineService {
     return await this.medicineRepository.find();
   }
 
-//get record by userid as id here
+//get record by medicine id 
   async getMedicineById(id: number) {
     const  medicine= await this.medicineRepository.findOneBy({ medicineId: id });
     if (!medicine) {
@@ -52,6 +56,6 @@ export class MedicineService {
     if (result.affected === 0) {
       throw new NotFoundException(`Medicine with ID ${id} not found`);
     }
-    return {result,message:`given id-${id} is deleted successfully`} ;
+    return {message:`given id-${id} is deleted successfully`} ;
   }
 }
