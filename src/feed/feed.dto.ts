@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString } from "class-validator";
 
-export class createfeedDto{
+export class CreatefeedDto{
 
   @IsNotEmpty()
   @IsString()
@@ -24,7 +24,7 @@ export class createfeedDto{
 }
 
 
-export class updatefeedDto {
+export class UpdatefeedDto {
   
   @IsNumber()
   @IsOptional()

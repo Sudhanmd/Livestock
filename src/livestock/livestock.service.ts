@@ -3,13 +3,13 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Livestock } from './livestock.entity';
-import { User } from 'src/user/user.entity';
-import { livestockDto, updatelivestockDto } from './livestock.dto';
+import { LivestockDto, UpdatelivestockDto } from './livestock.dto';
 
 
 
 @Injectable()
 export class LivestockService {
+  [x: string]: any;
  
   constructor(
     @InjectRepository(Livestock)
@@ -17,7 +17,7 @@ export class LivestockService {
   ) {}
 
 
-  async createLivestock(updatelivestock:livestockDto) {
+  async createLivestock(updatelivestock:LivestockDto) {
     try {
      return await  this.livestockRepository.save(updatelivestock);
     } catch (error) {
@@ -42,7 +42,7 @@ export class LivestockService {
 
 
   // Method to update an existing livestock record
-  async updateLivestock(livestockId: number, update:updatelivestockDto ) {
+  async updateLivestock(livestockId: number, update:UpdatelivestockDto ) {
     try {
       console.info(update)
       const checklivestock = await this.livestockRepository.findOne({where:{livestockId}})

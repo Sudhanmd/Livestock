@@ -3,7 +3,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Feed } from './feed.entity';
-import { createfeedDto, updatefeedDto } from './feed.dto';
+import { CreatefeedDto, UpdatefeedDto } from './feed.dto';
 
 
 @Injectable()
@@ -14,31 +14,42 @@ export class FeedService {
   ) {}
 
   // Method to create a new feed record
-  async createFeed(feed:createfeedDto) {
+  async createFeed(feed:CreatefeedDto) {
          const Feedcreated = await this.feedRepository.save(feed) 
          return Feedcreated;       
   }
    
 
   async getAllFeeds() {
-    return await this.feedRepository.find();
+    try {
+      const allfeed =  await this.feedRepository.find();
+      return allfeed;
+    } catch (error) {
+      throw new BadRequestException(error.message || error)
+    }
   }
 
   async getFeedById(id: number){
-    const feed = await this.feedRepository.findOneBy({ feedId: id });
-    if (!feed) {
-      throw new NotFoundException(`Feed with ID ${id} not found`);
+    try {
+      const feed = await this.feedRepository.findOneBy({ feedId: id });
+      if (!feed) {
+        throw new NotFoundException(`Feed with ID ${id} not found`);
+      }
+      return feed;
+    } catch (error) {
+      throw new BadRequestException(error.message || error)
     }
-    return feed;
+   
   }
 
-  async updateFeed(feedId: number,_updatefeed:updatefeedDto) {
+  async updateFeed(feedId: number,_updatefeed:UpdatefeedDto) {
     try {
+      console.info(_updatefeed)
       const checkfeed = await this.feedRepository.findOne({where:{feedId}});
       if(!checkfeed){
          throw new NotFoundException(`given feedId ${feedId} is not found`)
         }
-      const updatefeed = await this.feedRepository.update(feedId,_updatefeed)
+      const updatefeed = await this.feedRepository.update(checkfeed,_updatefeed)
       return{ success:true, message:updatefeed}
     } catch (error) {
       throw new BadRequestException(error.message || error)
@@ -51,6 +62,6 @@ export class FeedService {
     if (result.affected === 0) {
       throw new NotFoundException(`Feed with ID ${id} not found`);
     }
-    return {result, message:`given id-${id} is deleted successfully`};
+    return { message:`given id-${id} is deleted successfully`};
   }
 }

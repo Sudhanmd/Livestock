@@ -1,7 +1,7 @@
-import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString } from "class-validator";
 
 
-export class requestDto{
+export class RequestDto{
     @IsString()
     @IsNotEmpty()
     requestType: string;
@@ -18,9 +18,10 @@ export class requestDto{
   @IsNotEmpty()
   requestDate: Date;
 
+
 }
  
-export class optinalrequesDto{
+export class OptinalrequesDto{
 
     @IsString()
     @IsOptional()

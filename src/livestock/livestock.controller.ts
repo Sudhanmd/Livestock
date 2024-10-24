@@ -1,7 +1,7 @@
 // livestock.controller.ts
 import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
 import { LivestockService } from './livestock.service';
-import { livestockDto, updatelivestockDto } from './livestock.dto';
+import { LivestockDto, UpdatelivestockDto } from './livestock.dto';
 
 
 @Controller('livestock')
@@ -10,7 +10,7 @@ export class LivestockController {
 
 
   @Post('addLivestock')
-  async createLivestock(@Body() body:livestockDto) {
+  async createLivestock(@Body() body:LivestockDto) {
     return await this.livestockService.createLivestock(body);
   }
   @Get('getAllLivestock')
@@ -26,7 +26,7 @@ export class LivestockController {
 
 
   @Put('updateLivestockByLivestockId/:livestockId')
-  async update(@Param('livestockId') livestockId: number, @Body()body:updatelivestockDto){
+  async update(@Param('livestockId') livestockId: number, @Body()body:UpdatelivestockDto){
     return this.livestockService.updateLivestock(livestockId,body);
   }
 
